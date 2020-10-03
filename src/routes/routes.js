@@ -4,6 +4,8 @@ import NotFound from '../pages/NotFoundPage.vue'
 
 // Admin pages
 import Overview from 'src/pages/Overview.vue'
+import CreateContentOwner from 'src/pages/CreateContentOwner.vue'
+import CreatePost from 'src/pages/CreatePost.vue'
 import UserProfile from 'src/pages/UserProfile.vue'
 import TableList from 'src/pages/TableList.vue'
 import Typography from 'src/pages/Typography.vue'
@@ -27,6 +29,18 @@ const routes = [
         path: 'overview',
         name: 'Overview',
         component: Overview
+      },
+
+      {
+        path: 'create-content-owner',
+        name: 'createContentOwner',
+        component: CreateContentOwner
+      },
+
+      {
+        path: 'create-post',
+        name: 'createPost',
+        component: CreatePost
       },
       {
         path: 'user',
