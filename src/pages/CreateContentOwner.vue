@@ -4,7 +4,7 @@
       <div class="col-md-6">
         <card>
           <h4 slot="header" class="card-title">Add Content Owner</h4>
-          <form>
+          <form enctype="multipart/form-data">
             <div class="row">
               <div class="col-md-12">
                 <base-input
@@ -26,19 +26,15 @@
               </div>
 
               <div class="col-md-6">
-                <input type="file" ref="file1" @change="selectProfilePicture" />
-
-                <!-- <base-input
+                <input
+                  accept="image/*"
                   type="file"
-                  label="Profile Picture"
-                  placeholder="Picture"
-                  v-model="author.authorsprofilrimg"
-                >
-                </base-input> -->
+                  @change="selectProfilePicture"
+                />
               </div>
 
               <div class="col-md-6">
-                <input type="file" ref="file2" @change="selectCoverPhoto" />
+                <!-- <input type="file" @change="selectCoverPhoto" /> -->
 
                 <!-- <base-input
                   type="file"
@@ -79,7 +75,7 @@
       <div class="col-md-6">
         <card>
           <h4 slot="header" class="card-title">Seo Information</h4>
-          <form>
+          <form enctype="multipart/form-data">
             <div class="row">
               <div class="col-md-12">
                 <base-input
@@ -152,36 +148,38 @@ export default {
   data() {
     return {
       author: {
-        is_active: true
+        is_active: true,
+        authorsprofilrimg: null,
+        coverImg: null
       }
     };
   },
   methods: {
-    selectProfilePicture() {
-      this.author.authorsprofilrimg = this.$refs.file1.files;
-      console.log(this.author.authorsprofilrimg);
-    },
-    selectCoverPhoto() {
-      this.author.coverImg = this.$refs.file2.files;
-      console.log(this.author.coverImg);
+    selectProfilePicture(event) {
+      this.author.authorsprofilrimg = event.target.files[0];
+      // let reader = new FileReader();
+      // reader.readAsDataURL(this.author.authorsprofilrimg);
+      // reader.onload = e => {
+      //   this.author.authorsprofilrimg = e.target.result;
+      // };
     },
     updateProfile() {
-      console.log(this.author);
-      if (
-        this.author.authorsname &&
-        this.author.authorsprofilrimg &&
-        this.author.authorsweblink &&
-        this.author.about &&
-        this.author.coverImg &&
-        this.author.page_title &&
-        this.author.focus_keyword &&
-        this.author.meta_keyword &&
-        this.author.description !== ""
-      ) {
-        Api.createContentOwner(this.author);
-      } else {
-        alert("Every Field must be filled with valied data!!!");
-      }
+      Api.createContentOwner(this.author);
+      // if (
+      //   this.author.authorsname &&
+      //   this.author.authorsprofilrimg &&
+      //   this.author.authorsweblink &&
+      //   this.author.about &&
+      //   this.author.coverImg &&
+      //   this.author.page_title &&
+      //   this.author.focus_keyword &&
+      //   this.author.meta_keyword &&
+      //   this.author.description !== ""
+      // ) {
+      //   Api.createContentOwner(this.author);
+      // } else {
+      //   alert("Every Field must be filled with valid data!!!");
+      // }
     }
   }
 };
